@@ -19,3 +19,4 @@ Ouvrir le dossier Frontend et lancer liveserver de votre IDE
  
 Si vous désirez afficher le code du backend et du frontend, faites le dans 2 instances de VSCode différentes pour éviter tout problème
 # Projet-3
+# Projet-3
