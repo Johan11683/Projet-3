@@ -59,7 +59,7 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 100px 0;
 }
 
 h1{
@@ -137,9 +137,41 @@ li:hover {
 	width: 100%;
 
 }
+
+#portfolio {
+	display: flex;
+	gap: 40px;
+	flex-direction: column;
+
+}
+
+#filtres {
+	text-align: center;
+	
+	}
+  
+#filtres button {
+	padding: 10px 20px;
+	margin: 5px;
+	border: none;
+	color: #1D6154;
+	background-color: #ffffff;
+	border: 1px solid #1D6154;
+	font-family: Syne;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19.2px;
+	border-radius: 60px;
+}
+
+#filtres button:hover {
+	background-color: #1D6154;
+	color:#ffffff;
+}
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
