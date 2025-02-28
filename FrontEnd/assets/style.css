@@ -30,6 +30,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
+	;
 }
 ol, ul {
 	list-style: none;
@@ -56,7 +58,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
 section {
 	margin: 100px 0;
@@ -95,6 +97,11 @@ nav li {
 	font-size: 1.2em;
 }
 
+nav li a {
+	text-decoration: none;
+	color: inherit;
+}
+
 li:hover {
 	color: #B1663C;
 }
@@ -125,6 +132,15 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+
+/* Galerie d'images importées de l'api */
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -215,6 +231,89 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
+
 }
 
+.login-page footer {
+	position: fixed;
+	bottom: 0;
+	right: 200px;
+}
+
+/* Page de Login */
+
+.login-page #login-link {
+	font-weight: bolder;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 30px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-group label {
+	color: #3d3d3d;
+	font-family: Work Sans;
+	font-weight: 500;
+	
+}
+
+form a {
+	color: #3d3d3d;
+}
+
+.form-login a {
+	font-family: Work Sans;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16.42px;
+	text-decoration: underline;
+}
+
+input {
+	width: 379px;
+	height: 51px;
+	background-color: #ffffff;
+	border: none;
+	outline: none;
+	box-shadow: 0px 4px 14px 0px #00000017;
+}
+
+#seConnecter {
+	background-color: #1D6154;
+	color: #FFFFFF;
+	width: 179px;
+	height: 36px;
+	border-radius: 60px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	font-family: Syne;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 16.8px;
+	text-align: center;
+}
+
+#seConnecter span {
+	font-family: Syne;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 16.8px;
+	text-align: center;
+	width: 102px;
+	height: 17px;
+}
+
+#seConnecter:hover {
+	color: #1D6154;
+	background-color: #FFFFFF;
+	cursor: pointer;
+}
