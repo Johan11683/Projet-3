@@ -9,20 +9,32 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="gallery.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<script src="gallery.js" defer></script>
+	<script src="modale.js" defer></script>
+	<script src="login.js" defer></script>
+
 </head>
 <body>
-<header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li><a href="#portfolio">projets</a></li>
-			<li><a href="#contact">contact</a></li>
-			<li><a href="login.html">login</a></li>
-			<li><a href="https://www.instagram.com/"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
-		</ul>
-	</nav>
-</header>
+	 <!-- Barre "Mode édition" cachée par défaut -->
+	 <div id="edit-mode-bar" class="hidden">
+        <i class="fa-regular fa-pen-to-square"></i> Mode édition
+    </div>
+
+    <header>
+        <h1 id="accueil">Sophie Bluel <span>Architecte d'intérieur</span></h1>
+        <nav>
+            <ul>
+                <li><a href="#portfolio">projets</a></li>
+                <li><a href="#contact">contact</a></li>
+                <li><a href="#" id="auth-link">Login</a></li>
+                <li><a href="https://www.instagram.com/">
+                    <img src="./assets/icons/instagram.png" alt="Instagram">
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+	
 <main>
 	<section id="introduction">
 		<figure>
@@ -32,12 +44,18 @@
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice).</p>
 		</article>
 	</section>
 
 	<section id="portfolio">
-		<h2 id="projets">Mes Projets</h2>
+		<div id="project-container">
+			<h2 id="projets">Mes Projets</h2>
+			<!-- Le bouton "Modifier" apparaîtra ici, si l'utilisateur est connecté -->
+			<button id="modifyButton" class="modify-button">
+				<i class="fa-regular fa-pen-to-square"></i> modifier
+			</button>
+		</div>
 		<div id="filtres">
 			<button id="filter-tous">Tous</button>
 			<!-- D'autres boutons seront ajoutés ici dynamiquement -->
@@ -46,8 +64,8 @@
 		<div class="gallery">
 			<!-- Galerie dynamique API/JS -->
 		</div>
-
 	</section>
+
 
 	<section id="contact">
 		<h2>Contact</h2>

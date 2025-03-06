@@ -130,7 +130,6 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 
 a {
@@ -317,3 +316,59 @@ input {
 	background-color: #FFFFFF;
 	cursor: pointer;
 }
+
+/* Container pour le titre et le bouton sur la même ligne */
+#project-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	gap: 30px;
+	margin-bottom: 30px;
+  }
+
+/* Bouton Modifier */
+.modify-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: inherit;
+    cursor: pointer;
+    display: none; /* Masquer par défaut */
+    align-items: center;
+    padding: 0;
+}
+
+.modify-button.show {
+    display: inline-flex; /* Afficher le bouton lorsque la classe .show est ajoutée */
+}
+
+.modify-button i {
+    margin-right: 5px;
+}
+
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none; /* Initialement caché */
+}
+
+/* Classe pour cacher les éléments, notamment lors de la connexion */
+.hidden {
+    display: none;
+}
+
+#edit-mode-bar {
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: flex;
+	padding: 1rem;
+    justify-content: center;
+    gap: 10px; /* Espace entre l'icône et le texte */
+    width: 100%;
+}
+
+
