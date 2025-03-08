@@ -34,7 +34,6 @@ fetch('http://localhost:5678/api/works')
   });
 
 
-  document.addEventListener('DOMContentLoaded', function () {
     // Récupérer les catégories depuis l'API
     fetch('http://localhost:5678/api/categories')
       .then(response => response.json())
@@ -48,41 +47,14 @@ fetch('http://localhost:5678/api/works')
         categories.forEach(category => {
           const filterButton = document.createElement('button');
           filterButton.textContent = category.name;
-          filterButton.addEventListener('click', () => filterGallery(category.name));
+          filterButton.classList.add("btn-filter");
+          filterButton.dataset.id = category.id;
           filterSection.appendChild(filterButton);
+          
+          filterButton.addEventListener('click', () => filterGallery(category.name));
         });
   
-        // Fonction pour appliquer le filtre
-        function filterGallery(category) {
-          const gallery = document.querySelector('.gallery');  // Utiliser la classe pour récupérer la galerie
-          console.log('Filtrage des travaux pour la catégorie:', category);
-          gallery.innerHTML = '';  // Vider la galerie avant de la remplir avec les éléments filtrés
-  
-          fetch('http://localhost:5678/api/works')
-            .then(response => response.json())
-            .then(works => {
-              let filteredWorks = works;
-              if (category !== 'tous') {
-                filteredWorks = works.filter(work => work.category.name === category);
-              }
-  
-              // Remplir la galerie avec les éléments filtrés
-              filteredWorks.forEach(work => {
-                const figure = document.createElement('figure');
-                const img = document.createElement('img');
-                img.src = work.imageUrl;
-                img.alt = work.title;
-                const figcaption = document.createElement('figcaption');
-                figcaption.textContent = work.title;
-                figure.appendChild(img);
-                figure.appendChild(figcaption);
-                gallery.appendChild(figure);
-              });
-            })
-            .catch(error => {
-              console.error('Erreur lors du filtrage:', error);
-            });
-        }
+ 
   
         // Initialiser la galerie avec tous les projets au début
         filterGallery('tous');
@@ -90,4 +62,35 @@ fetch('http://localhost:5678/api/works')
       .catch(error => {
         console.error('Erreur lors de la récupération des catégories :', error);
       });
-  });
+       // Fonction pour appliquer le filtre
+       function filterGallery(category) {
+        const gallery = document.querySelector('.gallery');  // Utiliser la classe pour récupérer la galerie
+        console.log('Filtrage des travaux pour la catégorie:', category);
+        gallery.innerHTML = '';  // Vider la galerie avant de la remplir avec les éléments filtrés
+
+        fetch('http://localhost:5678/api/works')
+          .then(response => response.json())
+          .then(works => {
+            let filteredWorks = works;
+            if (category !== 'tous') {
+              filteredWorks = works.filter(work => work.category.name === category);
+            }
+
+            // Remplir la galerie avec les éléments filtrés
+            filteredWorks.forEach(work => {
+              const figure = document.createElement('figure');
+              const img = document.createElement('img');
+              img.src = work.imageUrl;
+              img.alt = work.title;
+              const figcaption = document.createElement('figcaption');
+              figcaption.textContent = work.title;
+              figure.appendChild(img);
+              figure.appendChild(figcaption);
+              gallery.appendChild(figure);
+            });
+          })
+          .catch(error => {
+            console.error('Erreur lors du filtrage:', error);
+          });
+      }
+

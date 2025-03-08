@@ -7,10 +7,6 @@ if (loginForm) {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
 
-        // Cacher le message d'erreur avant chaque nouvelle tentative
-        const errorMessage = document.getElementById("errorMessage");
-        errorMessage.style.display = "none"; // Cacher le message d'erreur
-
         try {
             const response = await fetch("http://localhost:5678/api/users/login", {
                 method: "POST",
@@ -27,7 +23,6 @@ if (loginForm) {
             } else {
                 // Afficher un message d'erreur si les identifiants sont incorrects
                 errorMessage.textContent = "Identifiants incorrects";
-                errorMessage.style.display = "block"; // Afficher le message d'erreur
             }
         } catch (error) {
             console.error("Erreur lors de la connexion :", error);
@@ -48,7 +43,7 @@ const isIndexPage = window.location.pathname.includes("index.html");
 
 // Vérifie si un token est présent dans le localStorage
 if (localStorage.getItem("token")) {
-    authLink.textContent = "Logout";
+    authLink.textContent = "logout";
 
     if (filtres) {
         filtres.classList.add("hidden"); // Cacher les filtres
@@ -64,7 +59,7 @@ if (localStorage.getItem("token")) {
         window.location.href = "index.html";
     });
 } else {
-    authLink.textContent = "Login";
+    authLink.textContent = "login";
     authLink.setAttribute("href", "login.html");
 
     if (filtres) {
@@ -75,4 +70,6 @@ if (localStorage.getItem("token")) {
         editModeBar.classList.add("hidden"); // Cacher la barre si déconnecté
         document.body.classList.remove("edit-mode-active"); // Annuler le décalage
     }
+    
+
 }

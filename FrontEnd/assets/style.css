@@ -86,6 +86,14 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+h3 {
+	font-family: Work Sans;
+	font-weight: 400;
+	font-size: 26px;
+	color: #000000;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -137,6 +145,9 @@ a {
 	color: inherit;
 }
 
+* {
+	box-sizing: border-box;
+}
 
 /* Galerie d'images importées de l'api */
 
@@ -357,7 +368,7 @@ input {
 
 /* Classe pour cacher les éléments, notamment lors de la connexion */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #edit-mode-bar {
@@ -368,7 +379,155 @@ input {
 	padding: 1rem;
     justify-content: center;
     gap: 10px; /* Espace entre l'icône et le texte */
-    width: 100%;
+	width: 100vw; /* Prend toute la largeur de l'écran */
+    min-width: 1440px; /* Minimum 1440px */
+    max-width: 1440px; /* Empêche d'aller au-delà de 1440px */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centre la barre */
+
 }
 
+/* Décalage du contenu pour éviter le chevauchement */
+body.edit-mode-active header {
+    margin-top: 59px;
+}
+
+/* Contenu de la modale */
+.modal {
+    background-color: #fff;
+    margin: 0;
+    position: relative; /* La modale doit être positionnée pour que .close-modal soit placé relativement à elle */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 60px;
+}
+
+.modal h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+/* Bouton de fermeture */
+.close-modal {
+    color: #1D6154;
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;   
+    right: 15px;
+    cursor: pointer;
+}
+
+/* Galerie d'images */
+#modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px 10px;
+    padding: 0px 70px;
+}
+
+#modal-gallery img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-width: 79px;
+    max-height: 102px;
+}
+
+/* Effet d'opacité sur l'arrière-plan lorsqu'on ouvre la modale */
+body.modal-open::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 3; /* Juste en dessous de la modale */
+}
+
+#modal-container {
+    display: none; /* Cachée par défaut */
+    position: fixed;
+    z-index: 4; /* Plus haut que le fond assombri */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Barre grise sous la galerie */
+.modal-divider {
+    width: 70%;
+    height: 1px;
+    background-color: #B3B3B3;
+    margin: 0px auto 0px;
+}
+
+/* Bouton "Ajouter une photo" */
+.add-photo-btn {
+    background-color: #1D6154;
+    color: white;
+    font-family: Syne;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin: 0 auto 20px; /* Centrage horizontal */
+    cursor: pointer;
+}
+
+/* Effet hover du bouton */
+.add-photo-btn:hover {
+    background-color: #fff;
+    color: #1D6154;
+}
+
+/* Vue par défaut (visible) */
+#modal-gallery-view {
+    display: block;
+}
+
+/* Vue Ajout photo (initialement cachée) */
+#modal-add-photo-view {
+    display: none;
+}
+
+/* Bouton "Retour" dans la vue Ajout photo */
+.back-to-gallery {
+    color: #1D6154;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* Formulaire dans la vue Ajout photo */
+#add-photo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Bouton de validation dans la vue Ajout photo */
+.submit-photo-btn {
+    background-color: #1D6154;
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Effet hover pour le bouton de validation */
+.submit-photo-btn:hover {
+    background-color: #fff;
+    color: #1D6154;
+}
 
