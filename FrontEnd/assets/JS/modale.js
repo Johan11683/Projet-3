@@ -57,11 +57,25 @@ function openModal() {
             modalGallery.innerHTML = '';
 
             data.forEach(item => {
+                const imgContainer = document.createElement("div");
+                imgContainer.classList.add("image-container");
+
                 const img = document.createElement("img");
                 img.src = item.imageUrl;
                 img.alt = item.title;
                 img.classList.add("modal-image");
-                modalGallery.appendChild(img);
+
+                // Création du bouton de suppression (en div)
+                const deleteButton = document.createElement("div");
+                deleteButton.classList.add("delete-image-btn");
+                deleteButton.innerHTML = `<i class="fa-solid fa-trash-can"></i>`; // Icône Font Awesome
+
+                // Ajouter l'image et le bouton dans le conteneur
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(deleteButton);
+
+                // Ajouter le conteneur de l'image à la galerie
+                modalGallery.appendChild(imgContainer);
             });
         })
         .catch(error => console.error('Erreur:', error));

@@ -406,6 +406,8 @@ body.edit-mode-active header {
 .modal h3 {
     font-size: 24px;
     margin: 40px;
+	text-align: center; /* Centrer le titre */
+    margin-bottom: 20px; /* Espace sous le titre */
 }
 
 /* Bouton de fermeture */
@@ -481,7 +483,7 @@ body.modal-open::before {
     font-weight: 700;
     font-size: 14px;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 50px;
     border-radius: 20px;
     cursor: pointer;
     margin-bottom: 20px;
@@ -491,6 +493,34 @@ body.modal-open::before {
 /* Effet hover du bouton */
 .add-photo-btn:hover {
     background-color: black;
+}
+
+/* Conteneur de l'image */
+.image-container {
+    position: relative; /* Pour pouvoir positionner l'icône au-dessus */
+    display: inline-block; /* S'assurer que les images sont côte à côte */
+}
+
+/* Bouton de suppression (en div) */
+.delete-image-btn {
+    position: absolute;
+    top: 4px;  /* Décalage du haut */
+    right: 4px; /* Décalage de la droite */
+    background-color: #000; /* Fond noir */
+    border-radius: 2px; /* Bords arrondis */
+    padding: 5px; /* Un peu d'espace autour de l'icône */
+    color: #fff; /* Icône blanche */
+    font-size: 10px; /* Taille de l'icône */
+    cursor: pointer;
+    z-index: 2; /* S'assurer que le bouton est au-dessus de l'image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Effet sur le bouton de suppression au survol */
+.delete-image-btn:hover {
+    background-color: #444; /* Fond légèrement plus clair au survol */
 }
 
 /* Bouton "Retour" dans la vue Ajout photo */
@@ -523,4 +553,3 @@ body.modal-open::before {
 .submit-photo-btn:hover {
     background-color: black;
 }
-
