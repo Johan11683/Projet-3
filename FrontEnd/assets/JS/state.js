@@ -1,3 +1,5 @@
+// Affiche le site suivant l'état de la connexion de l'utilisateur
+
 const authLink = document.getElementById("auth-link");
 const filtres = document.getElementById("filtres");
 const editModeBar = document.getElementById("edit-mode-bar");

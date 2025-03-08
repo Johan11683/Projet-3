@@ -1,96 +1,87 @@
-fetch('http://localhost:5678/api/works')
-  .then(response => {
+// Fonction utilitaire pour récupérer les données depuis l'API
+const fetchData = async (url) => {
+  try {
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error('Erreur de chargement des données');
     }
-    return response.json();
-  })
-  .then(data => {
-    const container = document.querySelector('.gallery');  // Récupère le conteneur de la galerie
-    // Vider le conteneur avant d'ajouter les nouveaux éléments
-    container.innerHTML = '';
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-    data.forEach(item => {
-      // Créer l'élément figure pour chaque projet
-      const figure = document.createElement('figure');
-      
-      // Créer l'image du projet
-      const img = document.createElement('img');
-      img.src = item.imageUrl;  // URL de l'image
-      img.alt = item.title;     // Titre de l'image (utile pour l'accessibilité)
-      figure.appendChild(img);
-      
-      // Créer la légende (figcaption) pour le projet
-      const figcaption = document.createElement('figcaption');
-      figcaption.textContent = item.title;  // Titre du projet
-      figure.appendChild(figcaption);
-      
-      // Ajouter le projet à la galerie
-      container.appendChild(figure);
-    });
-  })
-  .catch(error => {
-    console.error('Erreur:', error);
+// Fonction pour afficher les projets dans la galerie
+const displayGallery = (works) => {
+  const container = document.querySelector('.gallery');
+  container.innerHTML = ''; // On vide la galerie avant de rajouter les nouveaux éléments
+
+  works.forEach(({ imageUrl, title }) => {
+    const figure = document.createElement('figure');
+    const img = document.createElement('img');
+    img.src = imageUrl;  // L'image du projet
+    img.alt = title;     // Le titre du projet, pour l'accessibilité
+    const figcaption = document.createElement('figcaption');
+    figcaption.textContent = title; // Le titre du projet
+
+    figure.append(img, figcaption);
+    container.appendChild(figure);
   });
+};
 
-
-    // Récupérer les catégories depuis l'API
-    fetch('http://localhost:5678/api/categories')
-      .then(response => response.json())
-      .then(categories => {
-        // Ajouter un bouton "Tous"
-        const filterTous = document.getElementById('filter-tous');
-        filterTous.addEventListener('click', () => filterGallery('tous'));
+// Fonction pour appliquer le filtre
+const filterGallery = async (categoryId) => {
+  // Récupérer les données des travaux
+  const works = await fetchData('http://localhost:5678/api/works');
   
-        // Ajouter les boutons de filtres pour chaque catégorie
-        const filterSection = document.getElementById('filtres');
-        categories.forEach(category => {
-          const filterButton = document.createElement('button');
-          filterButton.textContent = category.name;
-          filterButton.classList.add("btn-filter");
-          filterButton.dataset.id = category.id;
-          filterSection.appendChild(filterButton);
-          
-          filterButton.addEventListener('click', () => filterGallery(category.name));
-        });
-  
- 
-  
-        // Initialiser la galerie avec tous les projets au début
-        filterGallery('tous');
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération des catégories :', error);
-      });
-       // Fonction pour appliquer le filtre
-       function filterGallery(category) {
-        const gallery = document.querySelector('.gallery');  // Utiliser la classe pour récupérer la galerie
-        console.log('Filtrage des travaux pour la catégorie:', category);
-        gallery.innerHTML = '';  // Vider la galerie avant de la remplir avec les éléments filtrés
+  let filteredWorks;  // On déclare filteredWorks
 
-        fetch('http://localhost:5678/api/works')
-          .then(response => response.json())
-          .then(works => {
-            let filteredWorks = works;
-            if (category !== 'tous') {
-              filteredWorks = works.filter(work => work.category.name === category);
-            }
+  // Si la catégorie est 'tous', on garde tous les travaux
+  if (categoryId === 'tous') {
+    filteredWorks = works;
+  } else {
+    // Sinon, on filtre les projets par catégorie
+    filteredWorks = works.filter(work => work.category.id === categoryId);
+  }
 
-            // Remplir la galerie avec les éléments filtrés
-            filteredWorks.forEach(work => {
-              const figure = document.createElement('figure');
-              const img = document.createElement('img');
-              img.src = work.imageUrl;
-              img.alt = work.title;
-              const figcaption = document.createElement('figcaption');
-              figcaption.textContent = work.title;
-              figure.appendChild(img);
-              figure.appendChild(figcaption);
-              gallery.appendChild(figure);
-            });
-          })
-          .catch(error => {
-            console.error('Erreur lors du filtrage:', error);
-          });
-      }
+  // Affichage des projets filtrés
+  displayGallery(filteredWorks);
+};
 
+// Fonction pour créer les boutons de filtres
+function createFilterButtons(categories) {
+  const filterSection = document.querySelector('#filtres');
+
+  // Ajouter un bouton "Tous"
+  const filterTous = document.querySelector('#filter-tous');
+  filterTous.addEventListener('click', () => filterGallery('tous'));
+
+  // Ajouter les boutons de filtres pour chaque catégorie
+  categories.forEach(({ id, name }) => {
+    const filterButton = document.createElement('button');
+    filterButton.textContent = name;
+    filterButton.classList.add('btn-filter');
+    filterButton.dataset.id = id; // Lier l'ID de la catégorie au bouton
+    filterSection.appendChild(filterButton);
+
+    // Quand on clique sur un bouton de catégorie, on applique le filtre
+    filterButton.addEventListener('click', () => filterGallery(id));
+  });
+}
+
+// Fonction d'initialisation
+const init = async () => {
+  // Récupérer et afficher les projets dans la galerie
+  const works = await fetchData('http://localhost:5678/api/works');
+  displayGallery(works);
+
+  // Récupérer les catégories et initialiser les filtres
+  const categories = await fetchData('http://localhost:5678/api/categories');
+  createFilterButtons(categories);
+
+  // Initialiser la galerie avec tous les projets au début
+  filterGallery('tous');
+};
+
+// Appeler la fonction d'initialisation pour démarrer l'application
+init();

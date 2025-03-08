@@ -323,8 +323,7 @@ input {
 }
 
 #seConnecter:hover {
-	color: #1D6154;
-	background-color: #FFFFFF;
+	background-color: black;
 	cursor: pointer;
 }
 
@@ -398,18 +397,15 @@ body.edit-mode-active header {
 .modal {
     background-color: #fff;
     margin: 0;
-    position: relative; /* La modale doit être positionnée pour que .close-modal soit placé relativement à elle */
+    position: relative;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
     padding: 20px;
-    gap: 60px;
 }
 
+
 .modal h3 {
-    text-align: center;
     font-size: 24px;
-    margin-top: 20px;
+    margin: 40px;
 }
 
 /* Bouton de fermeture */
@@ -427,7 +423,7 @@ body.edit-mode-active header {
 #modal-gallery {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 20px 10px;
+    gap: 25px 10px;
     padding: 0px 70px;
 }
 
@@ -438,6 +434,15 @@ body.edit-mode-active header {
     max-width: 79px;
     max-height: 102px;
 }
+
+#modal-gallery-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+}
+
 
 /* Effet d'opacité sur l'arrière-plan lorsqu'on ouvre la modale */
 body.modal-open::before {
@@ -465,7 +470,7 @@ body.modal-open::before {
     width: 70%;
     height: 1px;
     background-color: #B3B3B3;
-    margin: 0px auto 0px;
+    margin: 40px auto;
 }
 
 /* Bouton "Ajouter une photo" */
@@ -475,28 +480,17 @@ body.modal-open::before {
     font-family: Syne;
     font-weight: 700;
     font-size: 14px;
-    line-height: 100%;
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
-    margin: 0 auto 20px; /* Centrage horizontal */
     cursor: pointer;
+    margin-bottom: 20px;
 }
+
 
 /* Effet hover du bouton */
 .add-photo-btn:hover {
-    background-color: #fff;
-    color: #1D6154;
-}
-
-/* Vue par défaut (visible) */
-#modal-gallery-view {
-    display: block;
-}
-
-/* Vue Ajout photo (initialement cachée) */
-#modal-add-photo-view {
-    display: none;
+    background-color: black;
 }
 
 /* Bouton "Retour" dans la vue Ajout photo */
@@ -527,7 +521,6 @@ body.modal-open::before {
 
 /* Effet hover pour le bouton de validation */
 .submit-photo-btn:hover {
-    background-color: #fff;
-    color: #1D6154;
+    background-color: black;
 }
 
