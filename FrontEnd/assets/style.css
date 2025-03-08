@@ -16,398 +16,408 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-	background-color: #FFFEF8;
-	;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-/** end reset css**/
-body {
-	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
-	font-size: 14px;
-}
-header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 0;
-}
-section {
-	margin: 100px 0;
+  display: block;
 }
 
-h1{
-	display: flex;
-	flex-direction: column;
-	font-family: 'Syne';
-	font-size: 22px;
-	font-weight: 800;
-	color: #B1663C
+body {
+  line-height: 1;
+  background-color: #FFFEF8;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/** end reset css **/
+
+body {
+  max-width: 1140px;
+  margin: auto;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+
+section {
+  margin: 100px 0;
+}
+
+h1 {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #B1663C;
 }
 
 h1 > span {
-	font-family: 'Work Sans';
-	font-size:10px;
-	letter-spacing: 0.1em;
-;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
 }
 
-h2{
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: #1D6154;
 }
 
 h3 {
-	font-family: Work Sans;
-	font-weight: 400;
-	font-size: 26px;
-	color: #000000;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  color: #000000;
 }
 
 nav ul {
-	display: flex;
-	align-items: center;
-	list-style-type: none;
-
+  display: flex;
+  align-items: center;
+  list-style-type: none;
 }
+
 nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+  padding: 0 10px;
+  font-size: 1.2em;
 }
 
 nav li a {
-	text-decoration: none;
-	color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 li:hover {
-	color: #B1663C;
+  color: #B1663C;
 }
+
 #introduction {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
+
 #introduction figure {
-	flex: 1
+  flex: 1;
 }
+
 #introduction img {
-	display: block;
-	margin: auto;
-	width: 80%;
+  display: block;
+  margin: auto;
+  width: 80%;
 }
 
 #introduction article {
-	flex: 1
+  flex: 1;
 }
+
 #introduction h2 {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 #introduction p {
-	margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
-	text-align: center;
+  text-align: center;
 }
 
 a {
-	text-decoration: none;
-	color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* Galerie d'images importées de l'api */
-
 .gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
 }
 
 .gallery img {
-	width: 100%;
-
+  width: 100%;
 }
 
 #portfolio {
-	display: flex;
-	gap: 40px;
-	flex-direction: column;
-
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
 }
 
 #filtres {
-	text-align: center;
-	
-	}
-  
+  text-align: center;
+}
+
 #filtres button {
-	padding: 10px 20px;
-	margin: 5px;
-	border: none;
-	color: #1D6154;
-	background-color: #ffffff;
-	border: 1px solid #1D6154;
-	font-family: Syne;
-	font-weight: 700;
-	font-size: 16px;
-	line-height: 19.2px;
-	border-radius: 60px;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  color: #1D6154;
+  background-color: #ffffff;
+  border: 1px solid #1D6154;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19.2px;
+  border-radius: 60px;
 }
 
 #filtres button:hover {
-	background-color: #1D6154;
-	color:#ffffff;
+  background-color: #1D6154;
+  color: #ffffff;
 }
 
 #contact {
-	width: 50%;
-	margin: auto;
+  width: 50%;
+  margin: auto;
 }
-#contact > * {
-	text-align: center;
 
+#contact > * {
+  text-align: center;
 }
-#contact h2{
-	margin-bottom: 20px;
+
+#contact h2 {
+  margin-bottom: 20px;
 }
+
 #contact form {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 #contact input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#contact label {
-	margin: 2em 0 1em 0;
-}
-#contact textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
+#contact label {
+  margin: 2em 0 1em 0;
+}
+
+#contact textarea {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"] {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: white;
+  background-color: #1D6154;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
 }
 
 footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em;
-
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em;
 }
 
 .login-page footer {
-	position: fixed;
-	bottom: 0;
-	right: 200px;
+  position: fixed;
+  bottom: 0;
+  right: 200px;
 }
 
 /* Page de Login */
 
 .login-page #login-link {
-	font-weight: bolder;
+  font-weight: bolder;
 }
 
 form {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 
 .form-group {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group label {
-	color: #3d3d3d;
-	font-family: Work Sans;
-	font-weight: 500;
-	
+  color: #3d3d3d;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
 }
 
 form a {
-	color: #3d3d3d;
+  color: #3d3d3d;
 }
 
 .form-login a {
-	font-family: Work Sans;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 16.42px;
-	text-decoration: underline;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16.42px;
+  text-decoration: underline;
 }
 
 input {
-	width: 379px;
-	height: 51px;
-	background-color: #ffffff;
-	border: none;
-	outline: none;
-	box-shadow: 0px 4px 14px 0px #00000017;
+  width: 379px;
+  height: 51px;
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  box-shadow: 0px 4px 14px 0px #00000017;
 }
 
 #seConnecter {
-	background-color: #1D6154;
-	color: #FFFFFF;
-	width: 179px;
-	height: 36px;
-	border-radius: 60px;
-	border: none;
-	box-shadow: 0px 4px 14px 0px #00000017;
-	font-family: Syne;
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 16.8px;
-	text-align: center;
+  background-color: #1D6154;
+  color: #FFFFFF;
+  width: 179px;
+  height: 36px;
+  border-radius: 60px;
+  border: none;
+  box-shadow: 0px 4px 14px 0px #00000017;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16.8px;
+  text-align: center;
 }
 
 #seConnecter span {
-	font-family: Syne;
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 16.8px;
-	text-align: center;
-	width: 102px;
-	height: 17px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16.8px;
+  text-align: center;
+  width: 102px;
+  height: 17px;
 }
 
 #seConnecter:hover {
-	background-color: black;
-	cursor: pointer;
+  background-color: black;
+  cursor: pointer;
 }
 
 /* Container pour le titre et le bouton sur la même ligne */
 #project-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	gap: 30px;
-	margin-bottom: 30px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 30px;
+  margin-bottom: 30px;
+}
 
 /* Bouton Modifier */
 .modify-button {
-    background: none;
-    border: none;
-    font-size: 16px;
-    color: inherit;
-    cursor: pointer;
-    display: none; /* Masquer par défaut */
-    align-items: center;
-    padding: 0;
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: inherit;
+  cursor: pointer;
+  display: none; /* Masquer par défaut */
+  align-items: center;
+  padding: 0;
 }
 
 .modify-button.show {
-    display: inline-flex; /* Afficher le bouton lorsque la classe .show est ajoutée */
+  display: inline-flex; /* Afficher le bouton lorsque la classe .show est ajoutée */
 }
 
 .modify-button i {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
-
 .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-    display: none; /* Initialement caché */
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  display: none; /* Initialement caché */
 }
 
 /* Classe pour cacher les éléments, notamment lors de la connexion */
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 #edit-mode-bar {
-    background-color: black;
-    color: white;
-    text-align: center;
-    display: flex;
-	padding: 1rem;
-    justify-content: center;
-    gap: 10px; /* Espace entre l'icône et le texte */
-	width: 100vw; /* Prend toute la largeur de l'écran */
-    min-width: 1440px; /* Minimum 1440px */
-    max-width: 1440px; /* Empêche d'aller au-delà de 1440px */
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%); /* Centre la barre */
-
+  background-color: black;
+  color: white;
+  text-align: center;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  gap: 10px; /* Espace entre l'icône et le texte */
+  width: 100vw; /* Prend toute la largeur de l'écran */
+  min-width: 1440px; /* Minimum 1440px */
+  max-width: 1440px; /* Empêche d'aller au-delà de 1440px */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Centre la barre */
 }
 
 /* Décalage du contenu pour éviter le chevauchement */
 body.edit-mode-active header {
-    margin-top: 59px;
-}
-
-/* Contenu de la modale */
+  margin-top: 59px;
+}/* Contenu de la modale */
 .modal {
     background-color: #fff;
     margin: 0;
     position: relative;
     border-radius: 10px;
     padding: 20px;
+    display: flex;
+    flex-direction: column; /* Alignement en colonne */
+    justify-content: center; /* Centrer les éléments verticalement */
+    align-items: center; /* Centrer les éléments horizontalement */
 }
 
-
+/* Titre de la modale */
 .modal h3 {
     font-size: 24px;
-    margin: 40px;
-	text-align: center; /* Centrer le titre */
-    margin-bottom: 20px; /* Espace sous le titre */
+    margin: 40px 0;
+    text-align: center; /* Centrer le titre */
 }
 
 /* Bouton de fermeture */
@@ -416,7 +426,7 @@ body.edit-mode-active header {
     font-size: 24px;
     font-weight: bold;
     position: absolute;
-    top: 10px;   
+    top: 10px;
     right: 15px;
     cursor: pointer;
 }
@@ -437,14 +447,14 @@ body.edit-mode-active header {
     max-height: 102px;
 }
 
+/* Vue Galerie */
 #modal-gallery-view {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
-
 
 /* Effet d'opacité sur l'arrière-plan lorsqu'on ouvre la modale */
 body.modal-open::before {
@@ -458,6 +468,7 @@ body.modal-open::before {
     z-index: 3; /* Juste en dessous de la modale */
 }
 
+/* Conteneur modal */
 #modal-container {
     display: none; /* Cachée par défaut */
     position: fixed;
@@ -479,7 +490,7 @@ body.modal-open::before {
 .add-photo-btn {
     background-color: #1D6154;
     color: white;
-    font-family: Syne;
+    font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 14px;
     border: none;
@@ -489,7 +500,6 @@ body.modal-open::before {
     margin-bottom: 20px;
 }
 
-
 /* Effet hover du bouton */
 .add-photo-btn:hover {
     background-color: black;
@@ -497,14 +507,14 @@ body.modal-open::before {
 
 /* Conteneur de l'image */
 .image-container {
-    position: relative; /* Pour pouvoir positionner l'icône au-dessus */
+    position: relative;
     display: inline-block; /* S'assurer que les images sont côte à côte */
 }
 
 /* Bouton de suppression (en div) */
 .delete-image-btn {
     position: absolute;
-    top: 4px;  /* Décalage du haut */
+    top: 4px; /* Décalage du haut */
     right: 4px; /* Décalage de la droite */
     background-color: #000; /* Fond noir */
     border-radius: 2px; /* Bords arrondis */
@@ -552,4 +562,59 @@ body.modal-open::before {
 /* Effet hover pour le bouton de validation */
 .submit-photo-btn:hover {
     background-color: black;
+}
+
+/* Section d'ajout de photo */
+#modal-add-photo-view h3 {
+    margin: 0 0 40px 0;
+}
+
+/* Section de téléchargement dans la vue Ajout photo */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #B3B3B3;
+    border-radius: 10px;
+    padding: 40px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Zone de téléchargement */
+.upload-area {
+    cursor: pointer;
+    font-size: 18px;
+    color: #1D6154;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* Message de type de fichier */
+.upload-area span {
+    font-size: 14px;
+    color: #888;
+}
+
+/* Zone de texte "Titre" */
+#photo-title {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Menu déroulant des catégories */
+#photo-category {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }

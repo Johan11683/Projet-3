@@ -1,5 +1,4 @@
-// Affiche le site suivant l'état de la connexion de l'utilisateur
-
+// Récupération des éléments HTML
 const authLink = document.getElementById("auth-link");
 const filtres = document.getElementById("filtres");
 const editModeBar = document.getElementById("edit-mode-bar");
@@ -8,34 +7,37 @@ const editModeBar = document.getElementById("edit-mode-bar");
 const isIndexPage = window.location.pathname.includes("index.html");
 
 // Vérifie si un token est présent dans le localStorage
-if (localStorage.getItem("token")) {
-    authLink.textContent = "logout";
+const isLoggedIn = Boolean(localStorage.getItem("token"));
+
+if (isLoggedIn) {
+    // Utilisateur connecté
+    authLink.textContent = "logout"; // Change le texte du lien pour "logout"
 
     if (filtres) {
-        filtres.classList.add("hidden"); // Cacher les filtres
+        filtres.classList.add("hidden"); // Cacher les filtres si connecté
     }
 
     if (isIndexPage && editModeBar) {
-        editModeBar.classList.remove("hidden"); // Afficher la barre uniquement sur index.html
-        document.body.classList.add("edit-mode-active"); // Décaler le header
+        editModeBar.classList.remove("hidden"); // Afficher la barre d'édition uniquement sur index.html
+        document.body.classList.add("edit-mode-active"); // Décaler le header pour activer le mode édition
     }
 
+    // Événement de déconnexion
     authLink.addEventListener("click", () => {
-        localStorage.removeItem("token");
-        window.location.href = "index.html";
+        localStorage.removeItem("token"); // Supprime le token du localStorage
+        window.location.href = "index.html"; // Redirige vers la page d'accueil
     });
 } else {
-    authLink.textContent = "login";
-    authLink.setAttribute("href", "login.html");
+    // Utilisateur non connecté
+    authLink.textContent = "login"; // Change le texte du lien pour "login"
+    authLink.setAttribute("href", "login.html"); // Redirige vers la page de login
 
     if (filtres) {
-        filtres.classList.remove("hidden"); // Réafficher les filtres
+        filtres.classList.remove("hidden"); // Afficher les filtres si non connecté
     }
 
     if (isIndexPage && editModeBar) {
-        editModeBar.classList.add("hidden"); // Cacher la barre si déconnecté
-        document.body.classList.remove("edit-mode-active"); // Annuler le décalage
+        editModeBar.classList.add("hidden"); // Cacher la barre d'édition si non connecté
+        document.body.classList.remove("edit-mode-active"); // Annuler le décalage du header
     }
-    
-
 }
