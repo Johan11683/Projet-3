@@ -172,8 +172,11 @@ a {
 }
 
 .gallery img {
-  width: 100%;
+  max-height: 480px;   /* Limite la hauteur des images à 480px, pour éviter que les nouvelles images ne soient trop grandes */
+  width: 100%;         /* Ajuste la largeur pour que l'image prenne toute la largeur disponible */
+  object-fit: cover;   /* Assure que l'image couvre l'espace sans être déformée */
 }
+
 
 #portfolio {
   display: flex;
@@ -553,18 +556,7 @@ cursor: pointer;
   gap: 10px;
 }
 
-/* Bouton de validation dans la vue Ajout photo */
-#submit-photo-btn {
-  background-color:#A7A7A7;
-  color: white;
-  font-weight: 700;
-  font-size: 14px;
-  border: none;
-  padding: 8px 50px;
-  border-radius: 20px;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
+
 
 
 /* Section d'ajout de photo */
@@ -597,14 +589,13 @@ cursor: pointer;
   flex-direction: column;
   width: 420px;
   gap: 15px;
-  padding: 20px 0;
   border-radius: 3px;
 }
 
 .upload-area i {
   font-size: 76px;
   color: #B9C5CC;
-  ;
+  margin-top: 20px;
 }
 
 .upload-area button {
@@ -624,6 +615,7 @@ cursor: pointer;
 .upload-area span {
   font-size: 10px;
   color: #888;
+  margin-bottom: 20px;
 }
 
 /* Zone de texte "Titre" */
@@ -655,4 +647,42 @@ cursor: pointer;
   color: #444444;
   padding: 10px;
 
+}
+
+#uploaded-image-container {
+  max-width: 129px;
+  max-height: 193px;
+  overflow: hidden; /* Cache ce qui dépasse */
+  position: relative; /* Assure que l'image se positionne correctement */
+}
+
+#uploaded-image {
+  width: 100%;  /* L'image prendra toute la largeur du conteneur */
+  height: 100%; /* L'image prendra toute la hauteur du conteneur */
+}
+
+/* Style du bouton Valider dans la vue Ajout photo (désactivé) */
+#submit-photo-btn:disabled {
+  background-color: #A7A7A7;  /* Couleur gris quand désactivé */
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  padding: 8px 50px;
+  border-radius: 20px;
+  cursor: not-allowed; /* Curseur pour indiquer que ce n'est pas cliquable */
+  margin-bottom: 20px;
+}
+
+/* Style du bouton Valider dans la vue Ajout photo (activé) */
+#submit-photo-btn:not(:disabled) {
+  background-color: #1D6154;  /* Couleur de fond quand activé */
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  padding: 8px 50px;
+  border-radius: 20px;
+  cursor: pointer; /* Curseur normal quand cliquable */
+  margin-bottom: 20px;
 }

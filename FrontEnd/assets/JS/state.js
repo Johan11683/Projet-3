@@ -29,7 +29,6 @@ if (isLoggedIn) {
     });
 } else {
     // Utilisateur non connecté
-    authLink.textContent = "login"; // Change le texte du lien pour "login"
     authLink.setAttribute("href", "login.html"); // Redirige vers la page de login
 
     if (filtres) {
