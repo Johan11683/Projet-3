@@ -20,29 +20,42 @@ modalContainer.innerHTML = `
         <div id="modal-add-photo-view" style="display: none;">
             <span class="close-modal">&times;</span>
             <span class="back-to-gallery"><i class="fa-solid fa-arrow-left"></i></span>
-            <h3>Ajout photo</h3>
-            <div class="upload-container">
-                <label for="photo-upload" class="upload-area">
-                    <p>+ Ajouter photo</p>
-                    <span>png, jpg: max 4 Mo</span>
-                </label>
-                <input type="file" id="photo-upload" accept=".png, .jpg" class="hidden" />
-                <p id="error-message" class="error-message"></p>
+            <div class="modal-container">
+                <h3>Ajout photo</h3>
+                <div class="modal-add-photo-content">
+                    
+                    <div class="upload-area">
+                        <i class="fa-regular fa-image"></i>
+                        <button type="button" id="upload-photo-btn" class="upload-photo-btn"><p>+ Ajouter photo</p></button>
+                        <input type="file" id="photo-upload" accept=".png, .jpg" class="hidden">
+                        <span>jpg, png : max 4 Mo</span>
+                        
+                    </div>
+                    
+                    
+                    <p id="error-message" class="error-message"></p>
+
+                    <form id="photo-form">
+                        <!-- Titre de la photo -->
+                        <label for="photo-title">Titre</label>
+                        <input type="text" id="photo-title" required>
+
+                        <!-- Menu déroulant pour les catégories -->
+                        <label for="photo-category">Catégorie</label>
+                        <select id="photo-category" required>
+                            <option value="">Sélectionner une catégorie</option>
+                            <!-- Les options seront ajoutées dynamiquement avec JavaScript -->
+                        </select>
+                        <div class="modal-divider"></div> <!-- Barre grise -->
+                    </form>
+                    <button class="add-photo-btn" id="submit-photo-btn" disabled>Valider</button>
+                </div>
             </div>
-
-            <!-- Titre de la photo -->
-            <input type="text" id="photo-title" placeholder="Titre de la photo" required>
-
-            <!-- Menu déroulant pour les catégories -->
-            <select id="photo-category" required>
-                <option value="">Sélectionner une catégorie</option>
-                <!-- Les options seront ajoutées dynamiquement avec JavaScript -->
-            </select>
-            <div class="modal-divider"></div> <!-- Barre grise -->
-            <button class="submit-photo-btn" id="submit-photo-btn" disabled>Valider</button>
         </div>
     </div>
 `;
+
+
 
 // Ajouter la modale au body
 document.body.appendChild(modalContainer);
@@ -148,7 +161,7 @@ function fetchCategories() {
         .then(response => response.json())
         .then(categories => {
             const categorySelect = document.getElementById("photo-category");
-            categorySelect.innerHTML = '<option value="">Sélectionner une catégorie</option>'; // Remise à zéro
+            categorySelect.innerHTML = '<option value=""></option>'; // Remise à zéro
 
             // Ajouter chaque catégorie dans le menu déroulant
             categories.forEach(category => {
@@ -164,16 +177,23 @@ function fetchCategories() {
         });
 }
 
-// Validation du fichier
+// Récupération des éléments
 const fileInput = document.getElementById('photo-upload');
-const uploadArea = document.querySelector('.upload-area');
+const uploadButton = document.getElementById('upload-photo-btn');
 const errorMessage = document.getElementById('error-message');
 const submitButton = document.getElementById("submit-photo-btn");
 
-uploadArea.addEventListener('click', () => {
+// Seul le bouton "+ Ajouter photo" doit ouvrir le sélecteur de fichiers
+uploadButton.addEventListener('click', () => {
     fileInput.click();
 });
 
+// Suppression de l'ancien comportement sur l'uploadArea
+// uploadArea.addEventListener('click', () => {
+//     fileInput.click();
+// });
+
+// Validation du fichier
 fileInput.addEventListener('change', validateFile);
 
 function validateFile() {

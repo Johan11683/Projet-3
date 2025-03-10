@@ -399,222 +399,260 @@ input {
 
 /* Décalage du contenu pour éviter le chevauchement */
 body.edit-mode-active header {
-  margin-top: 59px;
+margin-top: 59px;
 }/* Contenu de la modale */
 .modal {
-    background-color: #fff;
-    margin: 0;
-    position: relative;
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column; /* Alignement en colonne */
-    justify-content: center; /* Centrer les éléments verticalement */
-    align-items: center; /* Centrer les éléments horizontalement */
+  background-color: #fff;
+  margin: 0;
+  position: relative;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Alignement en colonne */
+  justify-content: center; /* Centrer les éléments verticalement */
+  align-items: center; /* Centrer les éléments horizontalement */
+  width: 630px;
 }
 
 /* Titre de la modale */
 .modal h3 {
-    font-size: 24px;
-    margin: 40px 0;
-    text-align: center; /* Centrer le titre */
+  font-size: 24px;
+  margin: 40px 0;
+  text-align: center; /* Centrer le titre */
 }
 
 /* Bouton de fermeture */
 .close-modal {
-    color: #1D6154;
-    font-size: 24px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    cursor: pointer;
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
 }
 
 /* Galerie d'images */
 #modal-gallery {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 25px 10px;
-    padding: 0px 70px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 25px 10px;
+  padding: 0px 70px;
 }
 
 #modal-gallery img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    max-width: 79px;
-    max-height: 102px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-width: 79px;
+  max-height: 102px;
 }
 
 /* Vue Galerie */
 #modal-gallery-view {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Effet d'opacité sur l'arrière-plan lorsqu'on ouvre la modale */
 body.modal-open::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 3; /* Juste en dessous de la modale */
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 3; /* Juste en dessous de la modale */
 }
 
 /* Conteneur modal */
 #modal-container {
-    display: none; /* Cachée par défaut */
-    position: fixed;
-    z-index: 4; /* Plus haut que le fond assombri */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  display: none; /* Cachée par défaut */
+  position: fixed;
+  z-index: 4; /* Plus haut que le fond assombri */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Barre grise sous la galerie */
 .modal-divider {
-    width: 70%;
-    height: 1px;
-    background-color: #B3B3B3;
-    margin: 40px auto;
+  width: 70%;
+  height: 1px;
+  background-color: #B3B3B3;
+  margin: 40px auto;
 }
 
 /* Bouton "Ajouter une photo" */
 .add-photo-btn {
-    background-color: #1D6154;
-    color: white;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    border: none;
-    padding: 8px 50px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-bottom: 20px;
+  background-color: #1D6154;
+  color: white;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  padding: 8px 50px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 /* Effet hover du bouton */
 .add-photo-btn:hover {
-    background-color: black;
+  background-color: black;
 }
 
 /* Conteneur de l'image */
 .image-container {
-    position: relative;
-    display: inline-block; /* S'assurer que les images sont côte à côte */
+  position: relative;
+  display: inline-block; /* S'assurer que les images sont côte à côte */
 }
 
-/* Bouton de suppression (en div) */
+/* Bouton de suppression */
 .delete-image-btn {
-    position: absolute;
-    top: 4px; /* Décalage du haut */
-    right: 4px; /* Décalage de la droite */
-    background-color: #000; /* Fond noir */
-    border-radius: 2px; /* Bords arrondis */
-    padding: 5px; /* Un peu d'espace autour de l'icône */
-    color: #fff; /* Icône blanche */
-    font-size: 10px; /* Taille de l'icône */
-    cursor: pointer;
-    z-index: 2; /* S'assurer que le bouton est au-dessus de l'image */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 4px; /* Décalage du haut */
+  right: 4px; /* Décalage de la droite */
+  background-color: #000; /* Fond noir */
+  border-radius: 2px; /* Bords arrondis */
+  padding: 5px; /* Un peu d'espace autour de l'icône */
+  color: #fff; /* Icône blanche */
+  font-size: 10px; /* Taille de l'icône */
+  cursor: pointer;
+  z-index: 2; /* S'assurer que le bouton est au-dessus de l'image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Effet sur le bouton de suppression au survol */
 .delete-image-btn:hover {
-    background-color: #444; /* Fond légèrement plus clair au survol */
+  background-color: #444; /* Fond légèrement plus clair au survol */
 }
 
 /* Bouton "Retour" dans la vue Ajout photo */
 .back-to-gallery {
-    color: #1D6154;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 10px;
+color: #000;
+font-size: 21px;
+font-weight: bold;
+position: absolute;
+top: 20px;
+left: 20px;
+cursor: pointer;
 }
+
 
 /* Formulaire dans la vue Ajout photo */
 #add-photo-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Bouton de validation dans la vue Ajout photo */
-.submit-photo-btn {
-    background-color: #1D6154;
-    color: white;
-    font-weight: 700;
-    border: none;
-    padding: 10px;
-    border-radius: 20px;
-    cursor: pointer;
+#submit-photo-btn {
+  background-color:#A7A7A7;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  padding: 8px 50px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
-/* Effet hover pour le bouton de validation */
-.submit-photo-btn:hover {
-    background-color: black;
-}
 
 /* Section d'ajout de photo */
 #modal-add-photo-view h3 {
-    margin: 0 0 40px 0;
+  margin: 40px 0;
 }
 
-/* Section de téléchargement dans la vue Ajout photo */
-.upload-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px dashed #B3B3B3;
-    border-radius: 10px;
-    padding: 40px;
-    margin-bottom: 20px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+
+.modal-add-photo-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  
+}
+
+#photo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  align-items: flex-start;
 }
 
 /* Zone de téléchargement */
 .upload-area {
-    cursor: pointer;
-    font-size: 18px;
-    color: #1D6154;
-    font-weight: 700;
-    margin-bottom: 10px;
+  background-color: #E8F1F6;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 420px;
+  gap: 15px;
+  padding: 20px 0;
+  border-radius: 3px;
 }
+
+.upload-area i {
+  font-size: 76px;
+  color: #B9C5CC;
+  ;
+}
+
+.upload-area button {
+  background-color:#CBD6DC;
+  color: #306685;
+  font-family: 'work sans', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
 
 /* Message de type de fichier */
 .upload-area span {
-    font-size: 14px;
-    color: #888;
+  font-size: 10px;
+  color: #888;
 }
 
 /* Zone de texte "Titre" */
 #photo-title {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 4px;
+  box-shadow: 0px 4px 14px 0px #00000017;
+  height: 51px;
+  margin-bottom: 20px;
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 14px;
+  color: #444444;
+  padding: 10px;
 }
 
 /* Menu déroulant des catégories */
 #photo-category {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0px 4px 14px 0px #00000017;
+  height: 51px;
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 14px;
+  color: #444444;
+  padding: 10px;
+
 }
