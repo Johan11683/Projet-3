@@ -72,7 +72,7 @@ function fetchImages() {
         .then(response => response.json())
         .then(data => {
             const modalGallery = document.getElementById("modal-gallery");
-            modalGallery.innerHTML = ''; 
+            modalGallery.innerHTML = '';  // Vider la galerie avant d'ajouter les nouvelles images
             data.forEach(item => createImage(item, modalGallery));
         })
         .catch(error => console.error('Erreur:', error));
@@ -96,7 +96,6 @@ function createImage(item, modalGallery) {
 }
 
 // Supprimer une image
-// Supprimer une image
 function handleDeleteImage(imageId, imgContainer) {
     const token = localStorage.getItem('token');  // Récupérer le token depuis localStorage
 
@@ -115,10 +114,11 @@ function handleDeleteImage(imageId, imgContainer) {
         if (!response.ok) throw new Error('Erreur de suppression');
         imgContainer.remove();
         console.log('Image supprimée');
+        fetchImages();  // Mettre à jour la galerie après suppression
+        updateGallery(); // Appeler la fonction updateGallery pour mettre à jour la galerie après suppression d'une photo
     })
     .catch(error => alert('Erreur lors de la suppression.'));
 }
-
 
 // Réinitialiser la modale
 function resetModal() {
@@ -265,7 +265,7 @@ function sendDataToAPI() {
     const category = document.getElementById("photo-category").value;
     const file = fileInput.files[0];
 
-    // Créer un formulaire FormData pour l'envoi de données multipart/form-data (inclut le fichier)
+    // Créer un formulaire FormData pour l'envoi de données
     const formData = new FormData();
     formData.append("title", title);
     formData.append("category", category);
@@ -292,6 +292,7 @@ function sendDataToAPI() {
         console.log(data);
         closeModal(); // Fermer la modale après envoi réussi
         fetchImages(); // Mettre à jour la galerie avec la nouvelle image
+        updateGallery(); // Appeler la fonction updateGallery pour mettre à jour la galerie après ajout de photo
     })
     .catch(error => {
         // Si erreur, afficher un message d'erreur

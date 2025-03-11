@@ -83,5 +83,16 @@ const init = async () => {
   filterGallery('tous');
 };
 
+// Fonction pour mettre à jour la galerie après une modification (ajout ou suppression)
+const updateGallery = async () => {
+  const works = await fetchData('http://localhost:5678/api/works');
+  displayGallery(works);
+};
+
+// Attacher la fonction à l'objet global `window` pour la rendre accessible ailleurs
+window.updateGallery = updateGallery;
+
+
+
 // Appeler la fonction d'initialisation pour démarrer l'application
 init();
