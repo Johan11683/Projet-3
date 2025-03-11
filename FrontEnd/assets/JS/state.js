@@ -1,3 +1,15 @@
+// Ce fichier gère l'état de l'utilisateur connecté ou non
+// Il affiche ou masque les éléments en fonction de l'état de connexion et gère la déconnexion de l'utilisateur
+// Il est inclus dans toutes les pages du site pour gérer l'affichage des éléments en fonction de l'état de connexion
+// Afficher ou masque les éléments de la page en fonction de l'état de connexion de l'utilisateur
+// Gère la déconnexion de l'utilisateur en supprimant le token du localStorage
+// Redirige l'utilisateur vers la page d'accueil après la déconnexion
+// Dirige l'utilisateur vers la page de connexion si l'utilisateur n'est pas connecté
+// Affiche les filtres uniquement si l'utilisateur n'est pas connecté
+// Affiche la barre d'édition uniquement si l'utilisateur est connecté et sur la page d'accueil
+// Décale le header vers le bas pour activer le mode édition
+
+
 // Récupération des éléments HTML
 const authLink = document.getElementById("auth-link");
 const filtres = document.getElementById("filtres");

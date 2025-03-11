@@ -162,14 +162,14 @@ a {
   box-sizing: border-box;
 }
 
-/* Galerie d'images importées de l'api */
+/* Galerie d'images importées de l'API */
 .gallery {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  grid-template-columns: repeat(3, 1fr); /* Crée 3 colonnes de même largeur */
+  gap: 20px; /* Espacement égal entre les éléments en colonnes et en lignes */
 }
+
 
 .gallery img {
   max-height: 480px;   /* Limite la hauteur des images à 480px, pour éviter que les nouvelles images ne soient trop grandes */
@@ -548,7 +548,6 @@ left: 20px;
 cursor: pointer;
 }
 
-
 /* Formulaire dans la vue Ajout photo */
 #add-photo-form {
   display: flex;
@@ -556,21 +555,16 @@ cursor: pointer;
   gap: 10px;
 }
 
-
-
-
 /* Section d'ajout de photo */
 #modal-add-photo-view h3 {
   margin: 40px 0;
 }
-
 
 .modal-add-photo-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  
 }
 
 #photo-form {
@@ -609,7 +603,6 @@ cursor: pointer;
   border-radius: 20px;
   cursor: pointer;
 }
-
 
 /* Message de type de fichier */
 .upload-area span {

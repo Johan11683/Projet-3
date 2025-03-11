@@ -1,3 +1,24 @@
+// Script pour la modale de gestion des images (ajout, suppression)
+// 1: Création et ajout de la modale au DOM
+// 2: Vérifier la présence du token (après connexion) pour afficher le bouton de modification
+// 3: Ouvrir la modale via le bouton modifier
+// 4: Charger les images depuis l'API dans la modale
+// 5: Ajouter les images avec bouton de suppression
+// 6: Gérer la suppression d'une image
+// 7: Réinitialiser la modale
+// 8: Fermer la modale
+// 9: Navigation entre les vues de la modale (galerie avec suppression et ajout photo)
+// 10: Charger les catégories pour le menu déroulant
+// 11: Gestion de l'upload d'image (type, taille)
+// 12: Prévisualisation de l'image
+// 13: Vérifier si le formulaire est valide, çad que tous les champs sont remplis, nécessaire pour activer le bouton "Valider"
+// 14: Activer/désactiver le bouton "Valider" à chaque modification des champs
+// 15: Si "Valider" est cliqué, envoyer les données à l'API et ajouter l'image à la modale et à la galerie
+// 16: Fonction updateGallery pour mettre à jour la galerie après ajout ou suppression d'une image
+// 17: Appeler la fonction updateGallery pour mettre à jour la galerie après ajout de photo
+// 18: Appeler la fonction updateGallery pour mettre à jour la galerie après suppression d'une photo
+
+
 // Création et ajout de la modale au DOM
 const modifyButton = document.getElementById("modifyButton");
 const modalContainer = document.createElement("div");
@@ -54,7 +75,11 @@ document.body.appendChild(modalContainer);
 
 // Vérifier la présence du token pour afficher le bouton de modification
 function checkToken() {
-    modifyButton.classList.toggle("show", !!localStorage.getItem("token"));
+    if (localStorage.getItem("token")) {
+        modifyButton.classList.add("show");
+    } else {
+        modifyButton.classList.remove("show");
+    }
 }
 
 checkToken();
@@ -66,7 +91,7 @@ function openModal() {
     fetchImages();
 }
 
-// Charger les images depuis l'API
+// Charger les images depuis l'API dans la modale
 function fetchImages() {
     fetch('http://localhost:5678/api/works')
         .then(response => response.json())
@@ -99,11 +124,6 @@ function createImage(item, modalGallery) {
 function handleDeleteImage(imageId, imgContainer) {
     const token = localStorage.getItem('token');  // Récupérer le token depuis localStorage
 
-    if (!token) {
-        alert('Vous devez être connecté pour supprimer une image.');
-        return;  // Empêche la suppression si le token est manquant
-    }
-
     fetch(`http://localhost:5678/api/works/${imageId}`, {
         method: 'DELETE',
         headers: {
@@ -111,7 +131,9 @@ function handleDeleteImage(imageId, imgContainer) {
         }
     })
     .then(response => {
-        if (!response.ok) throw new Error('Erreur de suppression');
+        if (!response.ok) {
+            throw new Error('Erreur de suppression');
+        }
         imgContainer.remove();
         console.log('Image supprimée');
         fetchImages();  // Mettre à jour la galerie après suppression
@@ -190,6 +212,7 @@ function validateFile() {
             fileInput.value = '';
             return;
         }
+
         if (file.size > 4 * 1024 * 1024) {
             errorMessage.textContent = 'Le fichier ne doit pas dépasser 4 Mo.';
             errorMessage.style.display = 'block';  // Afficher le message d'erreur
