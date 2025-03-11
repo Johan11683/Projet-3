@@ -1,7 +1,7 @@
 // Ce fichier gère l'état de l'utilisateur connecté ou non
 // Il affiche ou masque les éléments en fonction de l'état de connexion et gère la déconnexion de l'utilisateur
 // Il est inclus dans toutes les pages du site pour gérer l'affichage des éléments en fonction de l'état de connexion
-// Afficher ou masque les éléments de la page en fonction de l'état de connexion de l'utilisateur
+// Afficher ou masque les éléments de la page en fonction de l'état de connexion de l'utilisateur (login/logout/barre d'édition/filtres)
 // Gère la déconnexion de l'utilisateur en supprimant le token du localStorage
 // Redirige l'utilisateur vers la page d'accueil après la déconnexion
 // Dirige l'utilisateur vers la page de connexion si l'utilisateur n'est pas connecté

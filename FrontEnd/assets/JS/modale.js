@@ -1,6 +1,6 @@
 // Script pour la modale de gestion des images (ajout, suppression)
 // 1: Création et ajout de la modale au DOM
-// 2: Vérifier la présence du token (après connexion) pour afficher le bouton de modification
+// 2: Vérifier la présence du token (après connexion) pour afficher le bouton modifier
 // 3: Ouvrir la modale via le bouton modifier
 // 4: Charger les images depuis l'API dans la modale
 // 5: Ajouter les images avec bouton de suppression
@@ -9,7 +9,7 @@
 // 8: Fermer la modale
 // 9: Navigation entre les vues de la modale (galerie avec suppression et ajout photo)
 // 10: Charger les catégories pour le menu déroulant
-// 11: Gestion de l'upload d'image (type, taille)
+// 11: Gestion des restrictions de l'upload d'image (type, taille)
 // 12: Prévisualisation de l'image
 // 13: Vérifier si le formulaire est valide, çad que tous les champs sont remplis, nécessaire pour activer le bouton "Valider"
 // 14: Activer/désactiver le bouton "Valider" à chaque modification des champs
