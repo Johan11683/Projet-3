@@ -1,54 +1,68 @@
-// Ce fichier gère l'état de l'utilisateur connecté ou non
-// Il affiche ou masque les éléments en fonction de l'état de connexion et gère la déconnexion de l'utilisateur
-// Il est inclus dans toutes les pages du site pour gérer l'affichage des éléments en fonction de l'état de connexion
-// Afficher ou masque les éléments de la page en fonction de l'état de connexion de l'utilisateur (login/logout/barre d'édition/filtres)
-// Gère la déconnexion de l'utilisateur en supprimant le token du localStorage
-// Redirige l'utilisateur vers la page d'accueil après la déconnexion
-// Dirige l'utilisateur vers la page de connexion si l'utilisateur n'est pas connecté
-// Affiche les filtres uniquement si l'utilisateur n'est pas connecté
-// Affiche la barre d'édition uniquement si l'utilisateur est connecté et sur la page d'accueil
-// Décale le header vers le bas pour activer le mode édition
+// Gère l'affichage dynamique des éléments en fonction de l'état de connexion de l'utilisateur.
+// Ce fichier est inclus dans toutes les pages du site pour gérer la connexion/déconnexion, 
+// l'affichage des filtres, de la barre d'édition, et la redirection en fonction de l'état de l'utilisateur.
 
+// Récupérer les éléments HTML utilisés
+const authLink = document.getElementById("auth-link"); // Lien de connexion/déconnexion
+const filtres = document.getElementById("filtres"); // Section des filtres
+const editModeBar = document.getElementById("edit-mode-bar"); // Barre d'édition
 
-// Récupération des éléments HTML
-const authLink = document.getElementById("auth-link");
-const filtres = document.getElementById("filtres");
-const editModeBar = document.getElementById("edit-mode-bar");
+// Vérifie si la page actuelle est "index.html"
+const isIndexPage = window.location.pathname.includes("index.html"); 
 
-// Vérifie si la page actuelle est index.html
-const isIndexPage = window.location.pathname.includes("index.html");
-
-// Vérifie si un token est présent dans le localStorage
+// Vérifie si l'utilisateur est connecté (présence d'un token dans localStorage)
 const isLoggedIn = Boolean(localStorage.getItem("token"));
 
-if (isLoggedIn) {
-    // Utilisateur connecté
-    authLink.textContent = "logout"; // Change le texte du lien pour "logout"
+// Fonction pour afficher les éléments spécifiques à un utilisateur connecté
+const showForLoggedInUser = () => {
+    // Mettre à jour le lien de connexion/déconnexion
+    authLink.textContent = "logout";
+    
 
+    // Cacher la section des filtres si l'utilisateur est connecté
     if (filtres) {
-        filtres.classList.add("hidden"); // Cacher les filtres si connecté
+        filtres.classList.add("hidden");
     }
 
+    // Afficher la barre d'édition uniquement si l'utilisateur est sur la page index.html
     if (isIndexPage && editModeBar) {
-        editModeBar.classList.remove("hidden"); // Afficher la barre d'édition uniquement sur index.html
-        document.body.classList.add("edit-mode-active"); // Décaler le header pour activer le mode édition
+        editModeBar.classList.remove("hidden");
+        document.body.classList.add("edit-mode-active");
     }
 
-    // Événement de déconnexion
+    console.log('L\'administrateur est connecté')
+    console.log('Déconnexion possible avec logout activée\nFiltres cachés\nBarre d\'édition active \nBouton modifier actif')
+
+
+
+    // Gérer l'événement de déconnexion
     authLink.addEventListener("click", () => {
-        localStorage.removeItem("token"); // Supprime le token du localStorage
-        window.location.href = "index.html"; // Redirige vers la page d'accueil
+        // Supprimer le token du localStorage et rediriger vers la page d'accueil
+        localStorage.removeItem("token"); // Si on clique sur authlink (logout si déconnecté), alors le token est supprimé
+        window.location.href = "index.html"; // redirection vers la page d'accueil
     });
-} else {
-    // Utilisateur non connecté
-    authLink.setAttribute("href", "login.html"); // Redirige vers la page de login
+};
 
+// Fonction pour afficher les éléments spécifiques à un utilisateur non connecté
+const showForLoggedOutUser = () => {
+    // Mettre à jour le lien de connexion pour rediriger vers la page de login
+    authLink.setAttribute("href", "login.html");
+
+    // Afficher la section des filtres uniquement si l'utilisateur n'est pas connecté
     if (filtres) {
-        filtres.classList.remove("hidden"); // Afficher les filtres si non connecté
+        filtres.classList.remove("hidden");
     }
 
+    // Cacher la barre d'édition si l'utilisateur n'est pas connecté et sur la page index.html
     if (isIndexPage && editModeBar) {
-        editModeBar.classList.add("hidden"); // Cacher la barre d'édition si non connecté
-        document.body.classList.remove("edit-mode-active"); // Annuler le décalage du header
+        editModeBar.classList.add("hidden");
+        document.body.classList.remove("edit-mode-active");
     }
+};
+
+// Applique les modifications selon l'état de l'utilisateur (connecté ou non)
+if (isLoggedIn) {
+    showForLoggedInUser();
+} else {
+    showForLoggedOutUser();
 }

@@ -207,6 +207,12 @@ a {
   color: #ffffff;
 }
 
+#filtres button.active {
+  background-color: #1D6154;
+  color: #ffffff;
+}
+
+
 #contact {
   width: 50%;
   margin: auto;
@@ -268,7 +274,7 @@ footer nav ul {
 
 /* Page de Login */
 
-.login-page #login-link {
+.login-page #auth-link {
   font-weight: bolder;
 }
 
