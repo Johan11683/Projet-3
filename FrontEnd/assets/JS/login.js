@@ -1,11 +1,11 @@
 // Script : Page de connexion
-// 1: envoie les données du formulaire de connexion à l'API pour obtenir un token
-// 2: stocke le token dans le localStorage
-// 3: redirige l'utilisateur vers la page d'accueil
-// 4: affiche un message d'erreur si les identifiants sont incorrects
-// 5: gère les erreurs réseau ou autres
-// 6: effectue la connexion
-// 7: affiche les messages d'erreur ou cache le message d'erreur
+// 1: Récupération des éléments du DOM
+// 2: Fonction pour afficher les messages d'erreur
+// 3: Fonction pour cacher le message d'erreur
+// 4: Fonction pour effectuer la connexion
+// 5: Écouteur d'événement pour la soumission du formulaire
+// 6: appeler la fonction de connexion
+
 
 // Récupération des éléments du DOM une seule fois
 const loginForm = document.getElementById("loginForm"); // Sélectionne le formulaire de connexion
@@ -40,7 +40,6 @@ const loginUser = async (email, password) => { // La fonction prend l'email et l
             hideError(); // Cacher le message d'erreur
             localStorage.setItem("token", data.token); // Sauvegarder le token
             window.location.href = "index.html"; // Redirection vers la page d'accueil
-            console.log('L\'administrateur est connecté')
         } else { // Si la réponse n'est pas OK
             // Afficher un message d'erreur si les identifiants sont incorrects
             displayError("Erreur dans l’identifiant ou le mot de passe");

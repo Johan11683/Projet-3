@@ -1,113 +1,123 @@
 // Script pour afficher les projets dans la galerie et appliquer les filtres
-// 1 : Récupère les données des projets et des catégories depuis l'API
-// 2 : Affiche les projets dans la galerie
-// 3 : Crée les boutons de filtres pour chaque catégorie
-// 4 : Applique le filtre lorsqu'un bouton est cliqué, "Tous" par défaut
-// 5 : Initialise l'application en appelant la fonction init
-// 6 : Met à jour la galerie après une modification (ajout ou suppression) avec la fonction updateGallery
-// 7 : Attache la fonction updateGallery à l'objet global window pour la rendre accessible dans modale.js 
-//     et ainsi mettre à jour la galerie et la modale après une modification
-
+// 1 : Récupère les données des projets dans l'API
+// 2 : Crée un élément figure pour chaque projet avec une image et un titre dans le DOM
+// 3 : Affiche les projets dans la galerie
+// 4 : Filtrer les projets en fonction de la catégorie sélectionnée
+// 5 : Créer tous les boutons de filtre cliquables et applique le filtre "Tous" par défaut
+// 6 : Défini l'événement de clic à chaque bouton de filtre
+// 7 : Définit un bouton comme actif et désactive les autres
+// 8 : Met à jour la galerie après une modification (ajout, suppression...)
+// 9 : Initialise l'application et charge les projets avec le filtre "Tous"
 
 // Fonction utilitaire pour récupérer les données depuis l'API
-const fetchData = async (url) => { // La fonction utilise Fetch pour récupérer les données depuis l'API
+const fetchData = async (url) => { 
   try {
-    const response = await fetch(url); // Elle effectue une requête HTTP GET pour récupérer les données (par défaut = GET)
-    if (!response.ok) throw new Error('Erreur de chargement des données');  // Si la réponse n'est pas OK, une erreur est levée
-    return await response.json(); // Convertit la réponse en JSON et la retourne
+    const response = await fetch(url); // Envoie une requête fetch pour obtenir les données depuis l'URL
+    if (!response.ok) throw new Error('Erreur de chargement des données'); // Si la réponse est incorrecte, on lance une erreur
+    return await response.json(); // Si la réponse est correcte, on retourne les données au format JSON
   } catch (error) { 
-    console.error(error); // Affiche l'erreur dans la console
+    console.error(error); // Si une erreur survient lors du fetch, on l'affiche dans la console
   }
 };
 
+// Fonction pour créer un élément <figure> contenant une image et un titre
+const createProjectElement = (imageUrl, title) => {
+  const figure = document.createElement('figure'); // Crée un élément <figure> pour contenir l'image et le titre
+  const img = document.createElement('img'); // Crée un élément <img> pour afficher l'image
+  img.src = imageUrl; // Affecte l'URL de l'image à la source de l'élément <img>
+  img.alt = title; // Ajoute le titre comme texte alternatif pour l'image (accessibilité)
+  
+  const figcaption = document.createElement('figcaption'); // Crée un élément <figcaption> pour afficher le titre
+  figcaption.textContent = title; // Assigne le titre du projet à l'élément <figcaption>
+
+  figure.append(img, figcaption); // Ajoute l'image et le titre à l'élément <figure>
+  return figure; // Retourne l'élément <figure> complet
+};
+
 // Fonction pour afficher les projets dans la galerie
-const displayGallery = (works) => {
-  const container = document.querySelector('.gallery'); // Sélectionne la galerie
-  container.innerHTML = ''; // Vider la galerie avant d'ajouter les nouveaux éléments
+const displayGallery = (works) => { 
+  const container = document.querySelector('.gallery'); // Sélectionne l'élément du DOM pour la galerie
+  container.innerHTML = ''; // Vide le contenu de la galerie pour ne pas avoir de doublons
 
-  works.forEach(({ imageUrl, title }) => {
-    const figure = document.createElement('figure'); // Pour chaque projet, crée une "figure"
-    const img = document.createElement('img'); // Crée une balise "img" pour l'image
-    img.src = imageUrl; // Définit l'attribut "src" de l'image
-    img.alt = title; // Définit l'attribut "alt" de l'image
-    const figcaption = document.createElement('figcaption'); // Crée une balise "figcaption" pour le titre
-    figcaption.textContent = title; // Définit le texte du titre
-
-    figure.append(img, figcaption); // Ajoute l'image et le titre à la "figure"
-    container.appendChild(figure); // Ajoute la "figure" à la galerie
+  works.forEach(({ imageUrl, title }) => { // Pour chaque projet dans le tableau works
+    const projectElement = createProjectElement(imageUrl, title); // Crée un élément pour le projet
+    container.appendChild(projectElement); // Ajoute l'élément projet à la galerie
   });
 };
 
-// Fonction pour appliquer le filtre
-const filterGallery = async (categoryId) => { // La fonction prend en paramètre l'ID de la catégorie
-  const works = await fetchData('http://localhost:5678/api/works'); // Récupère les projets depuis l'API
-  const filteredWorks = categoryId === 'tous' // Si l'ID est "tous", tous les projets sont affichés, sinon le filtre est appliqué
-    ? works // Si l'ID est "tous", tous les projets sont affichés
-    : works.filter(work => work.category.id === categoryId); // Sinon, les projets sont filtrés par catégorie
+// Fonction pour filtrer les projets en fonction de la catégorie sélectionnée
+const filterGallery = async (categoryId) => {
+  const works = await fetchData('http://localhost:5678/api/works'); // Récupère tous les projets depuis l'API
+  
+  let filteredWorks; // Déclare une variable pour stocker les projets filtrés
+  if (categoryId === 'tous') { // Si la catégorie sélectionnée est "tous"
+    filteredWorks = works; // Affiche tous les projets
+  } else {
+    filteredWorks = works.filter(work => work.category.id === categoryId); // Filtre les projets par catégorie
+  }
+
   displayGallery(filteredWorks); // Affiche les projets filtrés dans la galerie
 };
 
-const createFilterButtons = (categories) => {
-  const filterSection = document.querySelector('#filtres');
-  
-  // Ajouter le bouton "Tous"
-  const filterTous = document.querySelector('#filter-tous');
-  filterTous.addEventListener('click', () => {
-    filterGallery('tous');
-    setActiveButton(filterTous); // Ajoute la classe "active" au bouton "Tous"
+// Fonction pour créer tous les boutons de filtre
+const createAllFilterButtons = (categories) => {
+  const filterSection = document.querySelector('#filtres'); // Sélectionne la section des filtres dans le DOM
+  const filterTous = document.querySelector('#filter-tous'); // Sélectionne le bouton "Tous" dans le DOM
+
+  addFilterButton(filterTous, 'tous', 'Tous'); // Ajoute l'événement de clic pour le bouton "Tous"
+  setActiveButton(filterTous); // Déclare "Tous" comme actif par défaut
+
+  categories.forEach(({ id, name }) => { // Pour chaque catégorie dans le tableau categories
+    const filterButton = document.createElement('button'); // Crée un bouton pour la catégorie
+    filterButton.textContent = name; // Affecte le nom de la catégorie comme texte du bouton
+    filterButton.classList.add('btn-filter'); // Ajoute une classe pour styliser le bouton
+    filterButton.dataset.id = id; // Ajoute l'ID de la catégorie comme attribut data-id
+    filterSection.appendChild(filterButton); // Ajoute le bouton dans la section des filtres
+
+    addFilterButton(filterButton, id, name); // Ajoute un événement de clic à ce bouton
   });
+};  
 
-  // "Tous" est actif par défaut
-  setActiveButton(filterTous); // Ajoute la classe "active" au bouton "Tous" par défaut
-
-  // Ajouter les boutons de filtres pour chaque catégorie
-  categories.forEach(({ id, name }) => {
-    const filterButton = document.createElement('button');
-    filterButton.textContent = name;
-    filterButton.classList.add('btn-filter');
-    filterButton.dataset.id = id;
-    filterSection.appendChild(filterButton);
-
-    filterButton.addEventListener('click', () => {
-      filterGallery(id);
-      setActiveButton(filterButton); // Ajoute la classe "active" au bouton cliqué
-      console.log(`La catégorie : ${name} est cliquée`);
-    });
+// Fonction pour ajouter un événement de clic à chaque bouton de filtre
+const addFilterButton = (button, categoryId, name) => {
+  button.addEventListener('click', () => { // Ajoute un événement de clic à ce bouton
+    filterGallery(categoryId); // Applique le filtre correspondant à la catégorie cliquée
+    setActiveButton(button); // Définit ce bouton comme actif en ajoutant la classe "active"
+    console.log(`La catégorie : ${name} est cliquée`); // Affiche un message dans la console pour déboguer
   });
 };
 
-// Fonction qui permet d'ajouter la classe Active au bouton cliqué, et d'empêcher qu'il soit cliquable à nouveau
+// Fonction pour définir un bouton comme actif et désactiver les autres
 const setActiveButton = (activeButton) => {
-  const allButtons = document.querySelectorAll('#filtres button');
-  allButtons.forEach(button => {
+  const allButtons = document.querySelectorAll('#filtres button'); // Sélectionne tous les boutons de filtre
+
+  allButtons.forEach(button => { // Parcourt chaque bouton de filtre
     button.classList.remove('active'); // Retire la classe "active" de tous les boutons
     button.disabled = false; // Réactive tous les boutons
   });
+
   activeButton.classList.add('active'); // Ajoute la classe "active" au bouton sélectionné
-  activeButton.disabled = true; // Désactive le bouton actif
+  activeButton.disabled = true; // Désactive le bouton pour qu'il ne soit plus cliquable
 };
 
-
-
-// Fonction d'initialisation
-const init = async () => { // La fonction initialise l'application
-  const works = await fetchData('http://localhost:5678/api/works'); // Récupère les projets depuis l'API
-  displayGallery(works);// Affiche les projets dans la galerie
-
-  const categories = await fetchData('http://localhost:5678/api/categories'); // Récupère les catégories depuis l'API
-  createFilterButtons(categories); // Crée les boutons de filtres pour chaque catégorie
-
-  filterGallery('tous'); // Applique le filtre "Tous" par défaut  
+// Fonction pour mettre à jour la galerie après une modification (ajout, suppression...)
+const updateGallery = async () => {
+  const works = await fetchData('http://localhost:5678/api/works'); // Récupère les projets mis à jour depuis l'API
+  displayGallery(works); // Affiche les projets mis à jour dans la galerie
 };
 
-// Fonction pour mettre à jour la galerie après une modification (ajout ou suppression)
-const updateGallery = async () => { // La fonction met à jour la galerie après une modification
-  const works = await fetchData('http://localhost:5678/api/works'); // Récupère les projets depuis l'API
-  displayGallery(works); //  Affiche les projets dans la galerie
+// Fonction d'initialisation de l'application
+const init = async () => {
+  const works = await fetchData('http://localhost:5678/api/works'); // Récupère tous les projets depuis l'API
+  displayGallery(works); // Affiche les projets dans la galerie
+
+  const categories = await fetchData('http://localhost:5678/api/categories'); // Récupère toutes les catégories depuis l'API
+  createAllFilterButtons(categories); // Crée les boutons de filtres pour chaque catégorie
+
+  filterGallery('tous'); // Applique le filtre "Tous" par défaut
 };
 
-// Attacher la fonction à l'objet global `window` pour la rendre accessible ailleurs
-window.updateGallery = updateGallery; // Rend la fonction updateGallery accessible dans modale.js
+// Attacher la fonction updateGallery à l'objet global `window` pour qu'elle soit accessible ailleurs (comme dans modale.js)
+window.updateGallery = updateGallery; // Permet à updateGallery d'être utilisée dans d'autres scripts
 
-// Appeler la fonction d'initialisation pour démarrer l'application
-init();
+init(); // Démarre l'application et charge les projets avec le filtre "Tous"

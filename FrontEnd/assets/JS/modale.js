@@ -1,22 +1,18 @@
 // Script pour la modale de gestion des images (ajout, suppression)
-// 1: Création et ajout de la modale au DOM
-// 2: Vérifier la présence du token (après connexion) pour afficher le bouton modifier
-// 3: Ouvrir la modale via le bouton modifier
-// 4: Charger les images depuis l'API dans la modale
-// 5: Ajouter les images avec bouton de suppression
-// 6: Gérer la suppression d'une image
-// 7: Réinitialiser la modale
-// 8: Fermer la modale
-// 9: Navigation entre les vues de la modale (galerie avec suppression et ajout photo)
-// 10: Charger les catégories pour le menu déroulant
-// 11: Gestion des restrictions de l'upload d'image (type, taille)
-// 12: Prévisualisation de l'image
-// 13: Vérifier si le formulaire est valide, çad que tous les champs sont remplis, nécessaire pour activer le bouton "Valider"
-// 14: Activer/désactiver le bouton "Valider" à chaque modification des champs
-// 15: Si "Valider" est cliqué, envoyer les données à l'API et ajouter l'image à la modale et à la galerie
-// 16: Fonction updateGallery pour mettre à jour la galerie après ajout ou suppression d'une image
-// 17: Appeler la fonction updateGallery pour mettre à jour la galerie après ajout de photo
-// 18: Appeler la fonction updateGallery pour mettre à jour la galerie après suppression d'une photo
+// 1: vérifie la présence du token pour afficher le bouton de modification
+// 2: ouvre et ferme la modale
+// 3: charge les images depuis l'API dans la modale
+// 4: ajoute une image avec un bouton de suppression
+// 5: supprimer une image
+// 6: réinitialise la modale
+// 7: naviguer entre les vues de la modale
+// 8: charge les catégories pour le menu déroulant
+// 9: gère l'upload d'image : limitations du fichier et sa prévisualisation
+// 10: vérifie si le formulaire est valide
+// 11: envoie les données à l'API
+// 12: affiche les messages d'erreur ou cache le message d'erreur
+// 13: envoie les données à l'API
+// 14: initialise la modale
 
 
 // Création et ajout de la modale au DOM
@@ -169,8 +165,6 @@ function resetModal() { // Fonction pour réinitialiser la modale
     // Réinitialiser l'input file pour permettre la réinsertion de la même image
     document.getElementById("photo-upload").value = ''; // Réinitialiser l'input file
 }
-
-
 
 // Navigation entre les vues de la modale
 function showAddPhotoView() { // Fonction pour afficher la vue d'ajout de photo
