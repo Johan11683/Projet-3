@@ -82,11 +82,13 @@ function checkToken() { // Fonction pour vérifier la présence du token
 
 checkToken(); // Appeler la fonction pour vérifier le token dès le début du code
 
+
 // Ouvrir la modale
 function openModal() { // Fonction pour ouvrir la modale
     modalContainer.style.display = "block"; // Afficher la modale
     document.body.classList.add("modal-open"); // Ajouter une classe CSS
     fetchImages(); // Appeler la fonction fetchImages pour charger les images depuis l'API
+    showGalleryView();
     console.log('Bouton modifier cliqué, modale ouverte')
 }
 
@@ -144,7 +146,6 @@ function handleDeleteImage(imageId, imgContainer) { // Fonction pour supprimer u
         }
         imgContainer.remove(); // Supprimer l'image de la galerie
         console.log('Image supprimée');// Afficher un message de confirmation
-        fetchImages();  // Mettre à jour la galerie après suppression
         updateGallery(); // Appeler la fonction updateGallery pour mettre à jour la galerie après suppression d'une photo
     })
     .catch(error => alert('Erreur lors de la suppression.')); // Gérer les erreurs
@@ -197,39 +198,43 @@ function fetchCategories() { // Fonction pour charger les catégories depuis l'A
 }
 
 // Gestion de l'upload d'image
-const fileInput = document.getElementById('photo-upload'); // Sélectionner l'input file
-const uploadButton = document.getElementById('upload-photo-btn'); // Sélectionner le bouton d'ajout de photo
-const errorMessage = document.getElementById('error-message'); // Sélectionner le message d'erreur
-const submitButton = document.getElementById("submit-photo-btn"); // Sélectionner le bouton de validation
+const fileInput = document.getElementById('photo-upload'); // Sélection de l'input file
+const uploadButton = document.getElementById('upload-photo-btn'); // Sélection du bouton d'ajout de photo
+const errorMessage = document.getElementById('error-message'); // Message d'erreur
+const submitButton = document.getElementById("submit-photo-btn"); // Bouton de validation
 
-uploadButton.addEventListener('click', () => fileInput.click()); // Ouvrir l'explorateur de fichiers lors du clic sur le bouton
-fileInput.addEventListener('change', validateFile); // Vérifier le fichier sélectionné lors du changement de l'input file
+// Ouvre l'explorateur de fichiers au clic sur le bouton
+uploadButton.addEventListener('click', () => fileInput.click());
 
-function validateFile() { // Fonction pour valider le fichier sélectionné
+// Gestion de l'événement change sur l'input file
+fileInput.addEventListener('change', validateFile);
+
+function validateFile() {
     const file = fileInput.files[0]; // Récupérer le fichier sélectionné
-    console.log("Fichier sélectionné:", file.name, "Taille:", file.size, "Type:", file.type); // Afficher les informations du fichier dans la console
+    const allowedTypes = ['image/png', 'image/jpg'];
 
-    if (file) { // Si un fichier est sélectionné
-        const allowedTypes = ['image/png', 'image/jpeg']; // Types de fichiers autorisés
-        if (!allowedTypes.includes(file.type)) { // Vérifier si le type du fichier est autorisé
-            errorMessage.textContent = 'Seuls les fichiers PNG et JPG sont autorisés.'; // Afficher un message d'erreur
-            errorMessage.style.display = 'block';  // Afficher le message d'erreur
-            fileInput.value = ''; // Réinitialiser l'input file
-            return; // Arrêter l'exécution de la fonction lorsque le fichier est invalide (break ne fonctionne que dans les boucles)
-        }
+    if (!file) return; // Aucun fichier sélectionné
 
-        if (file.size > 4 * 1024 * 1024) { // Vérifier si la taille du fichier ne dépasse pas 4 Mo
-            errorMessage.textContent = 'Le fichier ne doit pas dépasser 4 Mo.'; // Afficher un message d'erreur
-            errorMessage.style.display = 'block';  // Afficher le message d'erreur // Afficher le message d'erreur
-            fileInput.value = ''; // Réinitialiser l'input file
-            return; // Arrêter l'exécution de la fonction lorsque le fichier est invalide
-        }
-
-        errorMessage.textContent = ''; // Réinitialiser le message d'erreur (si l'utilisateur a corrigé son erreur, il faut cacher le message)
-        errorMessage.style.display = 'none';  // Cacher le message d'erreur
-        previewImage(file); // Appeler la fonction previewImage pour afficher l'image
+    if (!allowedTypes.includes(file.type)) {
+        errorMessage.textContent = 'Seuls les fichiers PNG et JPG sont autorisés.';
+        errorMessage.style.display = 'block';
+        fileInput.value = ''; // Réinitialiser l'input
+        return;
     }
+
+    if (file.size > 4 * 1024 * 1024) { // Taille max 4 Mo
+        errorMessage.textContent = 'Le fichier ne doit pas dépasser 4 Mo.';
+        errorMessage.style.display = 'block';
+        fileInput.value = ''; // Réinitialiser l'input
+        return;
+    }
+
+    errorMessage.textContent = '';
+    errorMessage.style.display = 'none';
+    previewImage(file); // Affiche l'aperçu
+    checkFormValidity(); // Vérifie la validité du formulaire
 }
+
 
 // Prévisualisation de l'image
 function previewImage(file) { // Fonction pour prévisualiser l'image sélectionnée
@@ -267,7 +272,6 @@ function checkFormValidity() { // Fonction pour vérifier si le formulaire est v
         errorMessage.style.display = 'none';  // Cacher le message d'erreur
         console.log('Tous les champs sont remplis, bouton valider déverouillé')
     }
-
 }
 
 // Activer/désactiver le bouton "Valider" à chaque modification des champs
